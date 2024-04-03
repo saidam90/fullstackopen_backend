@@ -1,7 +1,10 @@
 const express = require("express");
 const app = express();
+const morgan = require("morgan");
 
-app.use(express.json());
+app.use(express.json()); //express.json() is middleware. This middleware is responsible for parsing incoming request bodies with JSON payloads.
+
+app.use(morgan("tiny"));
 
 let persons = [
   {
