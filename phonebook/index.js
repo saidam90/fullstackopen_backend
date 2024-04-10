@@ -161,7 +161,18 @@ app.post("/api/persons", (request, response, next) => {
     .then((savedPerson) => {
       response.json(savedPerson);
     })
-    .catch((error) => next(error));
+    .catch((error) => {
+      if (error.name === "ValidationError") {
+        // Extract the validation error message
+        const errorMessage = error.message;
+        console.log("Validation Error:", errorMessage); // Log the error message
+        // Send the error message in the response
+        return response.status(400).json({ error: errorMessage });
+      } else {
+        // Pass other errors to the error handler middleware
+        next(error);
+      }
+    });
 });
 
 app.put("/api/persons/:id", (request, response, next) => {
