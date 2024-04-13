@@ -28,7 +28,7 @@ if (name && number) {
     number: number,
   });
 
-  person.save().then((result) => {
+  person.save().then(() => {
     console.log(
       `Added ${person.name} with number ${person.number} to phonebook`
     );
